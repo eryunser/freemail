@@ -489,16 +489,16 @@ if (els.createCustomOverlay){
   };
 }
 
-// 初始化长度：默认读取历史值（8-30 之间），否则为 8
+// 初始化长度：默认读取历史值（8-30 之间），否则为 12
 if (lenRange && lenVal){
-  const storedLen = Number(localStorage.getItem(STORAGE_KEYS.length) || '8');
-  const clamped = Math.max(8, Math.min(30, isNaN(storedLen) ? 8 : storedLen));
+  const storedLen = Number(localStorage.getItem(STORAGE_KEYS.length) || '12');
+  const clamped = Math.max(8, Math.min(30, isNaN(storedLen) ? 12 : storedLen));
   lenRange.value = String(clamped);
   lenVal.textContent = String(clamped);
   updateRangeProgress(lenRange);
   lenRange.addEventListener('input', ()=>{
     const v = Number(lenRange.value);
-    const cl = Math.max(8, Math.min(30, isNaN(v) ? 8 : v));
+    const cl = Math.max(8, Math.min(30, isNaN(v) ? 12 : v));
     lenVal.textContent = String(cl);
     localStorage.setItem(STORAGE_KEYS.length, String(cl));
     updateRangeProgress(lenRange);

@@ -1,11 +1,30 @@
 export function generateRandomId(length = 8) {
-  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
+  const syllables = [
+    "al","el","an","en","er","ra","na","lo","vi","li","mar","lin",
+    "der","or","ar","se","ta","ro","bel","ca","do","fa","lea","zen"
+  ];
+
+  const makeWord = (len) => {
+    let word = "";
+    while (word.length < len) {
+      word += syllables[Math.floor(Math.random() * syllables.length)];
+    }
+    return word.length > len ? word.slice(0, len) : word;
+  };
+
   const len = Math.max(4, Math.min(32, Number(length) || 8));
-  for (let i = 0; i < len; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
+
+  if (len <= 12) {
+    return makeWord(len).toLowerCase();
+  } else {
+    const firstLen = Math.floor((len - 1) / 2);
+    const lastLen = len - 1 - firstLen;
+
+    const first = makeWord(firstLen);
+    const last = makeWord(lastLen);
+
+    return (first + "_" + last).toLowerCase();
   }
-  return result;
 }
 
 export function extractEmail(emailString) {
