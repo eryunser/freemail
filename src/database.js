@@ -443,11 +443,11 @@ export async function assignMailboxToUser(db, { userId = null, username = null, 
  */
 export async function getUserMailboxes(db, userId){
   const sql = `
-    SELECT m.address, m.created_at, um.is_pinned
+    SELECT m.address, m.created_at, m.is_pinned
     FROM user_mailboxes um
     JOIN mailboxes m ON m.id = um.mailbox_id
     WHERE um.user_id = ?
-    ORDER BY um.is_pinned DESC, datetime(m.created_at) DESC
+    ORDER BY m.is_pinned DESC, datetime(m.created_at) DESC
   `;
   const { results } = await db.prepare(sql).bind(userId).all();
   return results || [];

@@ -630,7 +630,7 @@ export async function handleApiRequest(request, db, mailDomains, options = { moc
         const payload = getJwtPayload();
         const adminUid = Number(payload?.userId || 0);
         const { results } = await db.prepare(`
-          SELECT m.address, m.created_at, COALESCE(um.is_pinned, 0) AS is_pinned
+          SELECT m.address, m.created_at, COALESCE(m.is_pinned, 0) AS is_pinned
           FROM mailboxes m
           LEFT JOIN user_mailboxes um ON um.mailbox_id = m.id AND um.user_id = ?
           ORDER BY is_pinned DESC, m.created_at DESC
@@ -642,11 +642,11 @@ export async function handleApiRequest(request, db, mailDomains, options = { moc
       const uid = Number(payload?.userId || 0);
       if (!uid) return Response.json([]);
       const { results } = await db.prepare(`
-        SELECT m.address, m.created_at, um.is_pinned
+        SELECT m.address, m.created_at, m.is_pinned
         FROM user_mailboxes um
         JOIN mailboxes m ON m.id = um.mailbox_id
         WHERE um.user_id = ?
-        ORDER BY um.is_pinned DESC, m.created_at DESC
+        ORDER BY m.is_pinned DESC, m.created_at DESC
         LIMIT ? OFFSET ?
       `).bind(uid, limit, offset).all();
       return Response.json(results || []);

@@ -150,8 +150,8 @@ async function loadUsers(){
 }
 
 window.viewUserMailboxes = async (a, b, c) => {
+  let btn = null, userId = a, username = b;
   try{
-    let btn = null, userId = a, username = b;
     if (a && typeof a === 'object' && a.tagName){ btn = a; userId = b; username = c; }
     if (btn) setButtonLoading(btn, '加载中…');
     if (els.userMailboxesLoading){ els.userMailboxesLoading.style.display = 'inline-flex'; }

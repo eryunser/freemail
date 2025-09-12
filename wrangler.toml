@@ -12,9 +12,6 @@ database_id = "98178168-85b8-4829-a804-7bba568c8ffa" # 你的database_id
 [vars]
 MAIL_DOMAIN = "eryuns.pp.ua" #可以多个 以英文逗号分隔
 ADMIN_NAME = "eryuns" # 超级管理员用户名 （不配名称 默认为admin）
-ADMIN_PASSWORD = "Hujunhao.110" # 超级管理员密码
-JWT_TOKEN = "PrssWard#123" # 随便一串字符串
-RESEND_API_KEY = re_hCApiPSz_FNAn6UaUX4nQ8NxHMjuTmQ4v
 
 # 静态资源目录（Workers + Assets）
 [assets]
